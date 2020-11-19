@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Travel_Guide.Models.TravelGuide>
+
+@{
+    ViewBag.Title = "List of towns";
+}
+
+<h1 style="font-family: Impact, Charcoal, sans-serif;text-align:center">List of towns</h1>
+
+<table class="table">
+@foreach (var item in Model) {
+    <tr>
+        <td style="background-image : url(@item.backgroundPicture);font-family: Impact, Charcoal, sans-serif ;padding:100px;font-size:25px;background-repeat: no-repeat;">
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("user"))
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success" })
+            }
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
+        </td>
+    </tr>
+}
+
+</table>

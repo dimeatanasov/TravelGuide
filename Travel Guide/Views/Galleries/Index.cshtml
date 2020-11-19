@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Travel_Guide.Models.Gallery>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Gallery added!</h1>
+<div>
+    @Html.ActionLink("Back to the list of towns", "Index", "TravelGuides", null, new { @class = "btn btn-default" })
+</div>

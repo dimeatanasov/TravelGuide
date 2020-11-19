@@ -1,0 +1,86 @@
+﻿@model Travel_Guide.Models.TravelGuide
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details for @Model.name</h2>
+<div>
+    <h3>Galleries in town</h3>
+    <table class="table">
+        @foreach (var item in Model.galleries)
+        {
+            if (Model.name == @item.townName)
+            {
+                <tr>
+                    <td>
+                        <a href="@item.pictureUrl">@item.pictureUrl</a>
+                    </td>
+
+                    <td>
+                        @if(User.IsInRole("admin")){
+                        @Html.ActionLink("Edit", "Edit", "Galleries", new { id = item.pictureId }, new { @class = "btn btn-success" })
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </table>
+</div>
+
+<div>
+    <h3>Hotels in town</h3>
+    <table class="table">
+        @foreach (var item in Model.hotels)
+        {
+            if (Model.name == @item.townName)
+            {
+                <tr>
+                    <td>
+                        <a href="@item.hotelUrl">@item.hotelUrl</a>
+                    </td>
+
+                    <td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Hotel", new { id = item.hotelId }, new { @class = "btn btn-success" })
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </table>
+</div>
+
+<div>
+    <h3>Restaurants in town</h3>
+    <table class="table">
+        @foreach (var item in Model.restaurants)
+        {
+            if (Model.name == @item.townName)
+            {
+                <tr>
+                    <td>
+                        <a href="@item.restoranUrl">@item.restoranUrl</a>
+                    </td>
+
+                    <td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Restaurants", new { id = item.restoranId }, new { @class = "btn btn-success" })
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Back to the list of towns", "Index", null, new { @class = "btn btn-default" })
+</div>
